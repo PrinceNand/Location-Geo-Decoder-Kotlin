@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.project.locationdecoder.ui.theme.LocationDecoderTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyApp()
+                    val viewModel: LocationViewModel = viewModel()
+                    MyApp(viewModel)
                 }
             }
         }
@@ -44,15 +47,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(viewModel: ViewModel) {
     val context = LocalContext.current
     val location = LocationUtils(context)
-    LocationDisplay(locationUtils = location, context = context)
+    LocationDisplay(locationUtils = location, context = context, viewModel)
 }
 
 @Composable
-fun LocationDisplay(locationUtils: LocationUtils, context: Context) {
-
+fun LocationDisplay(locationUtils: LocationUtils, context: Context, viewModel: ViewModel) {
 
     // Launcher to get multiple permission
     val requestPermissionLauncher =
