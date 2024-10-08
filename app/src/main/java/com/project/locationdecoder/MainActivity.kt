@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import com.project.locationdecoder.ui.theme.LocationDecoderTheme
@@ -35,11 +36,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    MyApp()
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyApp() {
+    val context = LocalContext.current
+    val location = LocationUtils(context)
+    LocationDisplay(locationUtils = location, context = context)
 }
 
 @Composable
