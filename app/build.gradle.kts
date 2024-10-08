@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.play.services.maps)
     val lifecycle_version = "2.8.6"
     val arch_version = "2.2.0"
 
