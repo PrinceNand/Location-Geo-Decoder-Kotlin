@@ -1,10 +1,13 @@
 package com.project.locationdecoder
 
+import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,6 +42,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LocationDisplay(locationUtils: LocationUtils, context: Context) {
+
+
+    // Launcher to get multiple permission
+    val requestPermissionLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestMultiplePermissions(),
+            onResult = { permission ->
+                if (permission[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+                    && permission[Manifest.permission.ACCESS_FINE_LOCATION] == true
+                ) {
+
+
+                }
+
+            })
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
